@@ -6,9 +6,9 @@ export function passwordStrengthValidator(): ValidatorFn {
 
 
     const RegExpController = {
-      latters: /^(?=.*[A-Z]).{8,}$/i,
-      digits: /^(?=.*[0-9]).{8,}$/,
-      symbols: /^(?=.*[!@#\$%\^&\*]).{8,}$/,
+      latters: /\p{Letter}.{7,}$/,
+      digits: /^(?=.*[0-9]).{7,}$/,
+      symbols: /^(?=.*[!@#\$%\^&\*]).{7,}$/,
     }
 
     let password_strength = 0;
@@ -16,7 +16,7 @@ export function passwordStrengthValidator(): ValidatorFn {
 
     for (RegExpCheck in RegExpController) {
       if (RegExpController[RegExpCheck]) {
-        const strength_check = new RegExp(RegExpController[RegExpCheck], 'i').test(control.value);
+        const strength_check = new RegExp(RegExpController[RegExpCheck], 'ui').test(control.value);
         if (strength_check) {
           password_strength++;
         }
